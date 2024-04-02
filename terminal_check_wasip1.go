@@ -1,7 +1,7 @@
 //go:build wasip1
 // +build wasip1
 
-package logrus
+package log
 
 func isTerminal(fd int) bool {
 	return false
