@@ -1,4 +1,4 @@
-package logrus
+package log
 
 import (
 	"io/ioutil"
@@ -144,8 +144,8 @@ func main() {
 	outfile = flag.Arg(0)
 	data = flag.Arg(1)
 
-	logrus.RegisterExitHandler(handler)
-	logrus.RegisterExitHandler(badHandler)
-	logrus.Fatal("Bye bye")
+	log.RegisterExitHandler(handler)
+	log.RegisterExitHandler(badHandler)
+	log.Fatal("Bye bye")
 }
 `)
