@@ -1,4 +1,4 @@
-package logrus_test
+package log_test
 
 import (
 	"bytes"
@@ -15,13 +15,13 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	. "github.com/sirupsen/logrus"
-	. "github.com/sirupsen/logrus/internal/testutils"
+	. "github.com/sirupsen/log"
+	. "github.com/sirupsen/log/internal/testutils"
 )
 
 // TestReportCaller verifies that when ReportCaller is set, the 'func' field
 // is added, and when it is unset it is not set or modified
-// Verify that functions within the Logrus package aren't considered when
+// Verify that functions within the log package aren't considered when
 // discovering the caller.
 func TestReportCallerWhenConfigured(t *testing.T) {
 	LogAndAssertJSON(t, func(log *Logger) {
@@ -40,7 +40,7 @@ func TestReportCallerWhenConfigured(t *testing.T) {
 		assert.Equal(t, "testWithCaller", fields["msg"])
 		assert.Equal(t, "info", fields["level"])
 		assert.Equal(t,
-			"github.com/sirupsen/logrus_test.TestReportCallerWhenConfigured.func3", fields[FieldKeyFunc])
+			"github.com/sirupsen/log_test.TestReportCallerWhenConfigured.func3", fields[FieldKeyFunc])
 	})
 
 	LogAndAssertJSON(t, func(log *Logger) {
@@ -93,7 +93,7 @@ func TestReportCallerHelperDirect(t *testing.T) {
 
 	assert.Equal(t, "direct", fields["msg"])
 	assert.Equal(t, "info", fields["level"])
-	assert.Regexp(t, "github.com/.*/logrus_test.logSomething", fields["func"])
+	assert.Regexp(t, "github.com/.*/log_test.logSomething", fields["func"])
 }
 
 // TestReportCallerHelperDirect - verify reference when logging from a function called via pointer
@@ -103,7 +103,7 @@ func TestReportCallerHelperViaPointer(t *testing.T) {
 
 	assert.Equal(t, "via pointer", fields["msg"])
 	assert.Equal(t, "info", fields["level"])
-	assert.Regexp(t, "github.com/.*/logrus_test.logSomething", fields["func"])
+	assert.Regexp(t, "github.com/.*/log_test.logSomething", fields["func"])
 }
 
 func TestPrint(t *testing.T) {
@@ -379,10 +379,10 @@ func TestNestedLoggingReportsCorrectCaller(t *testing.T) {
 	assert.Equal(t, "looks delicious", fields["msg"])
 	assert.Equal(t, "eating raw fish", fields["context"])
 	assert.Equal(t,
-		"github.com/sirupsen/logrus_test.TestNestedLoggingReportsCorrectCaller", fields["func"])
+		"github.com/sirupsen/log_test.TestNestedLoggingReportsCorrectCaller", fields["func"])
 	cwd, err := os.Getwd()
 	require.NoError(t, err)
-	assert.Equal(t, filepath.ToSlash(fmt.Sprintf("%s/logrus_test.go:%d", cwd, line-1)), filepath.ToSlash(fields["file"].(string)))
+	assert.Equal(t, filepath.ToSlash(fmt.Sprintf("%s/log_test.go:%d", cwd, line-1)), filepath.ToSlash(fields["file"].(string)))
 
 	buffer.Reset()
 
@@ -410,9 +410,9 @@ func TestNestedLoggingReportsCorrectCaller(t *testing.T) {
 	assert.Equal(t, "The hardest workin' man in show business", fields["msg"])
 	assert.Nil(t, fields["fields.msg"], "should not have prefixed previous `msg` entry")
 	assert.Equal(t,
-		"github.com/sirupsen/logrus_test.TestNestedLoggingReportsCorrectCaller", fields["func"])
+		"github.com/sirupsen/log_test.TestNestedLoggingReportsCorrectCaller", fields["func"])
 	require.NoError(t, err)
-	assert.Equal(t, filepath.ToSlash(fmt.Sprintf("%s/logrus_test.go:%d", cwd, line-1)), filepath.ToSlash(fields["file"].(string)))
+	assert.Equal(t, filepath.ToSlash(fmt.Sprintf("%s/log_test.go:%d", cwd, line-1)), filepath.ToSlash(fields["file"].(string)))
 
 	logger.ReportCaller = false // return to default value
 }
@@ -540,7 +540,7 @@ func TestParseLevel(t *testing.T) {
 	assert.Equal(t, TraceLevel, l)
 
 	_, err = ParseLevel("invalid")
-	assert.Equal(t, "not a valid logrus Level: \"invalid\"", err.Error())
+	assert.Equal(t, "not a valid log Level: \"invalid\"", err.Error())
 }
 
 func TestLevelString(t *testing.T) {
@@ -654,7 +654,7 @@ func TestReplaceHooks(t *testing.T) {
 }
 
 // Compile test
-func TestLogrusInterfaces(t *testing.T) {
+func TestlogInterfaces(t *testing.T) {
 	var buffer bytes.Buffer
 	// This verifies FieldLogger and Ext1FieldLogger work as designed.
 	// Please don't use them. Use Logger and Entry directly.
