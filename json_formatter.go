@@ -1,4 +1,4 @@
-package logrus
+package log
 
 import (
 	"bytes"
@@ -66,7 +66,7 @@ func (f *JSONFormatter) Format(entry *Entry) ([]byte, error) {
 		switch v := v.(type) {
 		case error:
 			// Otherwise errors are ignored by `encoding/json`
-			// https://github.com/sirupsen/logrus/issues/137
+			// https://github.com/sirupsen/log/issues/137
 			data[k] = v.Error()
 		default:
 			data[k] = v
@@ -87,7 +87,7 @@ func (f *JSONFormatter) Format(entry *Entry) ([]byte, error) {
 	}
 
 	if entry.err != "" {
-		data[f.FieldMap.resolve(FieldKeyLogrusError)] = entry.err
+		data[f.FieldMap.resolve(FieldKeylogError)] = entry.err
 	}
 	if !f.DisableTimestamp {
 		data[f.FieldMap.resolve(FieldKeyTime)] = entry.Time.Format(timestampFormat)
