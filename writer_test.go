@@ -1,4 +1,4 @@
-package logrus_test
+package log_test
 
 import (
 	"bufio"
@@ -9,18 +9,18 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/log"
 	"github.com/stretchr/testify/assert"
 )
 
 func ExampleLogger_Writer_httpServer() {
-	logger := logrus.New()
+	logger := log.New()
 	w := logger.Writer()
 	defer w.Close()
 
 	srv := http.Server{
 		// create a stdlib log.Logger that writes to
-		// logrus.Logger.
+		// log.Logger.
 		ErrorLog: log.New(w, "", 0),
 	}
 
@@ -30,19 +30,19 @@ func ExampleLogger_Writer_httpServer() {
 }
 
 func ExampleLogger_Writer_stdlib() {
-	logger := logrus.New()
-	logger.Formatter = &logrus.JSONFormatter{}
+	logger := log.New()
+	logger.Formatter = &log.JSONFormatter{}
 
-	// Use logrus for standard log output
+	// Use log for standard log output
 	// Note that `log` here references stdlib's log
-	// Not logrus imported under the name `log`.
+	// Not log imported under the name `log`.
 	log.SetOutput(logger.Writer())
 }
 
 func TestWriterSplitNewlines(t *testing.T) {
 	buf := bytes.NewBuffer(nil)
-	logger := logrus.New()
-	logger.Formatter = &logrus.TextFormatter{
+	logger := log.New()
+	logger.Formatter = &log.TextFormatter{
 		DisableColors:    true,
 		DisableTimestamp: true,
 	}
@@ -66,8 +66,8 @@ func TestWriterSplitNewlines(t *testing.T) {
 
 func TestWriterSplitsMax64KB(t *testing.T) {
 	buf := bytes.NewBuffer(nil)
-	logger := logrus.New()
-	logger.Formatter = &logrus.TextFormatter{
+	logger := log.New()
+	logger.Formatter = &log.TextFormatter{
 		DisableColors:    true,
 		DisableTimestamp: true,
 	}
