@@ -1,4 +1,4 @@
-package logrus
+package log
 
 import (
 	"bytes"
@@ -152,7 +152,7 @@ func (f *TextFormatter) Format(entry *Entry) ([]byte, error) {
 		fixedKeys = append(fixedKeys, f.FieldMap.resolve(FieldKeyMsg))
 	}
 	if entry.err != "" {
-		fixedKeys = append(fixedKeys, f.FieldMap.resolve(FieldKeyLogrusError))
+		fixedKeys = append(fixedKeys, f.FieldMap.resolve(FieldKeylogError))
 	}
 	if entry.HasCaller() {
 		if f.CallerPrettyfier != nil {
@@ -212,7 +212,7 @@ func (f *TextFormatter) Format(entry *Entry) ([]byte, error) {
 				value = entry.Level.String()
 			case key == f.FieldMap.resolve(FieldKeyMsg):
 				value = entry.Message
-			case key == f.FieldMap.resolve(FieldKeyLogrusError):
+			case key == f.FieldMap.resolve(FieldKeylogError):
 				value = entry.err
 			case key == f.FieldMap.resolve(FieldKeyFunc) && entry.HasCaller():
 				value = funcVal
@@ -259,7 +259,7 @@ func (f *TextFormatter) printColored(b *bytes.Buffer, entry *Entry, keys []strin
 	}
 
 	// Remove a single newline if it already exists in the message to keep
-	// the behavior of logrus text_formatter the same as the stdlib log package
+	// the behavior of log text_formatter the same as the stdlib log package
 	entry.Message = strings.TrimSuffix(entry.Message, "\n")
 
 	caller := ""
