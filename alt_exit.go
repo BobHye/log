@@ -1,4 +1,4 @@
-package logrus
+package log
 
 // The following code was sourced and modified from the
 // https://github.com/tebeka/atexit package governed by the following license:
@@ -32,7 +32,7 @@ var handlers = []func(){}
 func runHandler(handler func()) {
 	defer func() {
 		if err := recover(); err != nil {
-			fmt.Fprintln(os.Stderr, "Error: Logrus exit handler error:", err)
+			fmt.Fprintln(os.Stderr, "Error: log exit handler error:", err)
 		}
 	}()
 
@@ -45,17 +45,17 @@ func runHandlers() {
 	}
 }
 
-// Exit runs all the Logrus atexit handlers and then terminates the program using os.Exit(code)
+// Exit runs all the log atexit handlers and then terminates the program using os.Exit(code)
 func Exit(code int) {
 	runHandlers()
 	os.Exit(code)
 }
 
-// RegisterExitHandler appends a Logrus Exit handler to the list of handlers,
-// call logrus.Exit to invoke all handlers. The handlers will also be invoked when
+// RegisterExitHandler appends a log Exit handler to the list of handlers,
+// call log.Exit to invoke all handlers. The handlers will also be invoked when
 // any Fatal log entry is made.
 //
-// This method is useful when a caller wishes to use logrus to log a fatal
+// This method is useful when a caller wishes to use log to log a fatal
 // message but also needs to gracefully shutdown. An example usecase could be
 // closing database connections, or sending a alert that the application is
 // closing.
@@ -63,11 +63,11 @@ func RegisterExitHandler(handler func()) {
 	handlers = append(handlers, handler)
 }
 
-// DeferExitHandler prepends a Logrus Exit handler to the list of handlers,
-// call logrus.Exit to invoke all handlers. The handlers will also be invoked when
+// DeferExitHandler prepends a log Exit handler to the list of handlers,
+// call log.Exit to invoke all handlers. The handlers will also be invoked when
 // any Fatal log entry is made.
 //
-// This method is useful when a caller wishes to use logrus to log a fatal
+// This method is useful when a caller wishes to use log to log a fatal
 // message but also needs to gracefully shutdown. An example usecase could be
 // closing database connections, or sending a alert that the application is
 // closing.
