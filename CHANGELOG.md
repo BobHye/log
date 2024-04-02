@@ -212,8 +212,8 @@ This new release introduces:
 
 # 0.8.7
 
-* logrus/core: fix possible race (#216)
-* logrus/doc: small typo fixes and doc improvements
+* log/core: fix possible race (#216)
+* log/doc: small typo fixes and doc improvements
 
 
 # 0.8.6
@@ -222,7 +222,7 @@ This new release introduces:
 
 # 0.8.5
 
-* logrus/core: revert #208
+* log/core: revert #208
 
 # 0.8.4
 
@@ -230,23 +230,23 @@ This new release introduces:
 
 # 0.8.3
 
-* logrus/core: fix entry log level (#208)
-* logrus/core: improve performance of text formatter by 40%
-* logrus/core: expose `LevelHooks` type
-* logrus/core: add support for DragonflyBSD and NetBSD
+* log/core: fix entry log level (#208)
+* log/core: improve performance of text formatter by 40%
+* log/core: expose `LevelHooks` type
+* log/core: add support for DragonflyBSD and NetBSD
 * formatter/text: print structs more verbosely
 
 # 0.8.2
 
-* logrus: fix more Fatal family functions
+* log: fix more Fatal family functions
 
 # 0.8.1
 
-* logrus: fix not exiting on `Fatalf` and `Fatalln`
+* log: fix not exiting on `Fatalf` and `Fatalln`
 
 # 0.8.0
 
-* logrus: defaults to stderr instead of stdout
+* log: defaults to stderr instead of stdout
 * hooks/sentry: add special field for `*http.Request`
 * formatter/text: ignore Windows for colors
 
