@@ -1,9 +1,9 @@
-package logrus_test
+package log_test
 
 import (
 	"testing"
 
-	log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/log"
 	"github.com/stretchr/testify/assert"
 )
 
