@@ -1,6 +1,6 @@
 // +build !appengine,!js,!windows,!nacl,!plan9
 
-package logrus
+package log
 
 import (
 	"io"
