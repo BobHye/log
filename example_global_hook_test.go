@@ -1,9 +1,9 @@
-package logrus_test
+package log_test
 
 import (
 	"os"
 
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/log"
 )
 
 var (
@@ -13,19 +13,19 @@ var (
 type GlobalHook struct {
 }
 
-func (h *GlobalHook) Levels() []logrus.Level {
-	return logrus.AllLevels
+func (h *GlobalHook) Levels() []log.Level {
+	return log.AllLevels
 }
 
-func (h *GlobalHook) Fire(e *logrus.Entry) error {
+func (h *GlobalHook) Fire(e *log.Entry) error {
 	e.Data["mystring"] = mystring
 	return nil
 }
 
 func ExampleGlobalHook() {
-	l := logrus.New()
+	l := log.New()
 	l.Out = os.Stdout
-	l.Formatter = &logrus.TextFormatter{DisableTimestamp: true, DisableColors: true}
+	l.Formatter = &log.TextFormatter{DisableTimestamp: true, DisableColors: true}
 	l.AddHook(&GlobalHook{})
 	mystring = "first value"
 	l.Info("first log")
