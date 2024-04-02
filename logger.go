@@ -1,4 +1,4 @@
-package logrus
+package log
 
 import (
 	"context"
@@ -35,7 +35,7 @@ type Logger struct {
 	ReportCaller bool
 
 	// The logging level the logger should log at. This is typically (and defaults
-	// to) `logrus.Info`, which allows Info(), Warn(), Error() and Fatal() to be
+	// to) `log.Info`, which allows Info(), Warn(), Error() and Fatal() to be
 	// logged.
 	Level Level
 	// Used to sync writing to the log. Locking is enabled by Default
@@ -76,11 +76,11 @@ func (mw *MutexWrap) Disable() {
 // `Out` and `Hooks` directly on the default logger instance. You can also just
 // instantiate your own:
 //
-//    var log = &logrus.Logger{
+//    var log = &log.Logger{
 //      Out: os.Stderr,
-//      Formatter: new(logrus.TextFormatter),
-//      Hooks: make(logrus.LevelHooks),
-//      Level: logrus.DebugLevel,
+//      Formatter: new(log.TextFormatter),
+//      Hooks: make(log.LevelHooks),
+//      Level: log.DebugLevel,
 //    }
 //
 // It's recommended to make this a global instance called `log`.
