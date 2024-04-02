@@ -1,4 +1,4 @@
-package logrus
+package log
 
 import (
 	"io/ioutil"
