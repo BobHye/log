@@ -200,15 +200,15 @@ This new release introduces:
 
 # 0.9.0
 
-* logrus/text_formatter: don't emit empty msg
-* logrus/hooks/airbrake: move out of main repository
-* logrus/hooks/sentry: move out of main repository
-* logrus/hooks/papertrail: move out of main repository
-* logrus/hooks/bugsnag: move out of main repository
-* logrus/core: run tests with `-race`
-* logrus/core: detect TTY based on `stderr`
-* logrus/core: support `WithError` on logger
-* logrus/core: Solaris support
+* log/text_formatter: don't emit empty msg
+* log/hooks/airbrake: move out of main repository
+* log/hooks/sentry: move out of main repository
+* log/hooks/papertrail: move out of main repository
+* log/hooks/bugsnag: move out of main repository
+* log/core: run tests with `-race`
+* log/core: detect TTY based on `stderr`
+* log/core: support `WithError` on logger
+* log/core: Solaris support
 
 # 0.8.7
 
