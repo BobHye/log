@@ -1,21 +1,21 @@
-package logrus_test
+package log_test
 
 import (
 	"os"
 
-	"github.com/sirupsen/logrus"
+	"github.com/sirupsen/log"
 )
 
 func Example_basic() {
-	var log = logrus.New()
-	log.Formatter = new(logrus.JSONFormatter)
-	log.Formatter = new(logrus.TextFormatter)                     //default
-	log.Formatter.(*logrus.TextFormatter).DisableColors = true    // remove colors
-	log.Formatter.(*logrus.TextFormatter).DisableTimestamp = true // remove timestamp from test output
-	log.Level = logrus.TraceLevel
+	var log = log.New()
+	log.Formatter = new(log.JSONFormatter)
+	log.Formatter = new(log.TextFormatter)                     //default
+	log.Formatter.(*log.TextFormatter).DisableColors = true    // remove colors
+	log.Formatter.(*log.TextFormatter).DisableTimestamp = true // remove timestamp from test output
+	log.Level = log.TraceLevel
 	log.Out = os.Stdout
 
-	// file, err := os.OpenFile("logrus.log", os.O_CREATE|os.O_WRONLY, 0666)
+	// file, err := os.OpenFile("log.log", os.O_CREATE|os.O_WRONLY, 0666)
 	// if err == nil {
 	// 	log.Out = file
 	// } else {
@@ -25,8 +25,8 @@ func Example_basic() {
 	defer func() {
 		err := recover()
 		if err != nil {
-			entry := err.(*logrus.Entry)
-			log.WithFields(logrus.Fields{
+			entry := err.(*log.Entry)
+			log.WithFields(log.Fields{
 				"omg":         true,
 				"err_animal":  entry.Data["animal"],
 				"err_size":    entry.Data["size"],
@@ -37,31 +37,31 @@ func Example_basic() {
 		}
 	}()
 
-	log.WithFields(logrus.Fields{
+	log.WithFields(log.Fields{
 		"animal": "walrus",
 		"number": 0,
 	}).Trace("Went to the beach")
 
-	log.WithFields(logrus.Fields{
+	log.WithFields(log.Fields{
 		"animal": "walrus",
 		"number": 8,
 	}).Debug("Started observing beach")
 
-	log.WithFields(logrus.Fields{
+	log.WithFields(log.Fields{
 		"animal": "walrus",
 		"size":   10,
 	}).Info("A group of walrus emerges from the ocean")
 
-	log.WithFields(logrus.Fields{
+	log.WithFields(log.Fields{
 		"omg":    true,
 		"number": 122,
 	}).Warn("The group's number increased tremendously!")
 
-	log.WithFields(logrus.Fields{
+	log.WithFields(log.Fields{
 		"temperature": -4,
 	}).Debug("Temperature changes")
 
-	log.WithFields(logrus.Fields{
+	log.WithFields(log.Fields{
 		"animal": "orca",
 		"size":   9009,
 	}).Panic("It's over 9000!")
